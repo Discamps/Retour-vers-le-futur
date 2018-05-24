@@ -27,15 +27,17 @@ class TimeTravel{
 		$interval=new DateInterval('P1M1W1D');
 		$period = new DatePeriod($this->start, $interval, $this->end, DatePeriod::EXCLUDE_START_DATE);
 		foreach ($period as $per) {
-			echo " -> " . $per->format('d-m-Y a:h:i:s');
+			$steps[] = $per->format('M-d-Y A:H:i:s');
 		}
-
+        return $steps;
 	}
 }
 $start = new DateTime('1954-04-23');
 $end = new DateTime('1985-12-31');
 $timeTravel = new TimeTravel($start, $end);
+echo "<pre>";
 echo $timeTravel->getTravelInfo() . "<br>";
 echo "Date probable d'arrivée " . $timeTravel->findDate(new DateTime('1985-12-31'))->format('d-m-Y h:i:s') . "<br>";
-echo $timeTravel->backToFuturStepByStep();
+var_dump($timeTravel->backToFuturStepByStep());
+echo "<pre>";
 
